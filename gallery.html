@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo & Video Gallery | Desert Safari Ventures Dubai</title>
+  <meta name="description" content="Explore high-resolution photo gallery of Dubai Red Dunes desert safaris, dune bashing, VIP Bedouin camp, quad biking, camel rides, and live Arabian shows.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐪</text></svg>">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.jpg" alt="Desert Safari Ventures Logo" class="logo-img">
+        <div class="logo-text">
+          <span class="logo-title">DESERT SAFARI</span>
+          <span class="logo-sub">VENTURES DUBAI</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html#packages" class="nav-link">Packages</a></li>
+        <li><a href="compare.html" class="nav-link">Compare Tiers</a></li>
+        <li><a href="itinerary.html" class="nav-link">Itinerary</a></li>
+        <li><a href="why-us.html" class="nav-link">Why DSV</a></li>
+        <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+        <li><a href="faq.html" class="nav-link">FAQ</a></li>
+      </ul>
+
+      <div class="header-controls">
+        <button class="btn btn-primary" onclick="openBookingDrawer()">
+          <span>Book Safari</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" style="min-height: 360px; padding: 140px 0 60px;">
+    <div class="hero-bg-container">
+      <img src="assets/images/hero.jpg" alt="Photo Gallery" class="hero-bg-img">
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content" style="text-align: center;">
+      <h1 class="hero-title">
+        Desert Safari <span class="gradient-text-gold">Photo Gallery</span>
+      </h1>
+      <p class="hero-subtitle" style="max-width: 680px; margin: 0 auto;">
+        Real photos taken during our Dubai desert safari tours across Lehbab dunes, VIP camps, quad bikes, and live performances.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding: 60px 0; background: var(--bg-dark);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div style="overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); cursor: pointer;" onclick="openLightbox('assets/images/hero.jpg', '4x4 Dune Bashing in Lahbab Red Dunes')">
+          <img src="assets/images/hero.jpg" alt="Dune Bashing" style="width: 100%; height: 220px; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="padding: 12px; background: var(--bg-card); color: #FFF; font-weight: 600; font-size: 14px;">🚙 Dune Bashing in Lahbab</div>
+        </div>
+
+        <div style="overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); cursor: pointer;" onclick="openLightbox('assets/images/show_bbq.jpg', '5★ Gourmet BBQ Buffet & Live Shows')">
+          <img src="assets/images/show_bbq.jpg" alt="BBQ Dinner & Shows" style="width: 100%; height: 220px; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="padding: 12px; background: var(--bg-card); color: #FFF; font-weight: 600; font-size: 14px;">🍱 BBQ Dinner & Live Stage Shows</div>
+        </div>
+
+        <div style="overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); cursor: pointer;" onclick="openLightbox('assets/images/vip_camp.jpg', 'VIP Luxury Carpeted Sofa Lounge')">
+          <img src="assets/images/vip_camp.jpg" alt="VIP Camp Lounge" style="width: 100%; height: 220px; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="padding: 12px; background: var(--bg-card); color: #FFF; font-weight: 600; font-size: 14px;">👑 VIP Luxury Table Lounge</div>
+        </div>
+
+        <div style="overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); cursor: pointer;" onclick="openLightbox('assets/images/quad_buggy.jpg', '400cc Quad Biking & Dune Buggies')">
+          <img src="assets/images/quad_buggy.jpg" alt="Quad Biking" style="width: 100%; height: 220px; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="padding: 12px; background: var(--bg-card); color: #FFF; font-weight: 600; font-size: 14px;">🏎️ Quad Biking & Can-Am Buggies</div>
+        </div>
+
+        <div style="overflow: hidden; border-radius: 12px; border: 1px solid var(--border-color); cursor: pointer;" onclick="openLightbox('assets/images/camel_falcon.jpg', 'Camel Ride & Falcon Photography')">
+          <img src="assets/images/camel_falcon.jpg" alt="Camel Ride" style="width: 100%; height: 220px; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="padding: 12px; background: var(--bg-card); color: #FFF; font-weight: 600; font-size: 14px;">🐪 Camel Ride & Falconry Photo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo" style="margin-bottom: 16px;">
+            <img src="assets/images/logo.jpg" alt="Desert Safari Ventures Logo" class="logo-img">
+            <div class="logo-text">
+              <span class="logo-title">DESERT SAFARI</span>
+              <span class="logo-sub">VENTURES DUBAI</span>
+            </div>
+          </a>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Safaris & Tiers</h4>
+          <ul class="footer-links">
+            <li><a href="evening-premium.html" class="footer-link">Evening Premium Safari</a></li>
+            <li><a href="vip-safari.html" class="footer-link">Evening VIP Luxury Safari</a></li>
+            <li><a href="standard-safari.html" class="footer-link">Evening Standard Safari</a></li>
+            <li><a href="morning-safari.html" class="footer-link">Sunrise & Morning Safari</a></li>
+            <li><a href="quad-buggy.html" class="footer-link">Quad Bike & Buggy Combos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="compare.html" class="footer-link">Compare Tiers</a></li>
+            <li><a href="itinerary.html" class="footer-link">Tour Program</a></li>
+            <li><a href="why-us.html" class="footer-link">Why Book Direct</a></li>
+            <li><a href="gallery.html" class="footer-link">Photo Gallery</a></li>
+            <li><a href="faq.html" class="footer-link">Frequently Asked Questions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact & Operations</h4>
+          <ul class="footer-links">
+            <li style="color: var(--text-muted); font-size: 14px;">📍 Office 402, Al Hudaiba Bldg, Bur Dubai, UAE</li>
+            <li style="color: var(--text-muted); font-size: 14px;">📞 WhatsApp / Call: +971 54 450 8581</li>
+            <li style="color: var(--brand-gold); font-size: 13px; margin-top: 8px;">DET License No: 640192</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Desert Safari Ventures. All rights reserved.</div>
+        <div style="display: flex; gap: 20px;">
+          <a href="privacy.html" class="footer-link">Privacy Policy</a>
+          <a href="terms.html" class="footer-link">Terms of Service</a>
+          <a href="license.html" class="footer-link">DET License Verification</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="lightboxModal" onclick="closeLightbox()">
+    <div style="position: relative; text-align: center;" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" alt="Enlarged view" class="lightbox-img">
+      <div id="lightboxCaption" style="margin-top: 12px; font-weight: 700; color: #FFF;"></div>
+    </div>
+  </div>
+
+  <a href="https://wa.me/971544508581" target="_blank" rel="noopener" class="floating-wa" aria-label="Contact on WhatsApp">💬</a>
+  <script src="app.js"></script>
+</body>
+</html>
