@@ -315,7 +315,7 @@ function submitBookingToWhatsapp(e) {
     `Please confirm my slot! Thank you.`;
     
   const encoded = encodeURIComponent(message);
-  window.open(`https://wa.me/971559445338?text=${encoded}`, '_blank');
+  window.open(`https://wa.me/971544508581?text=${encoded}`, '_blank');
 }
 
 // FAQ SEARCH & ACCORDION
