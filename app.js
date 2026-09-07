@@ -125,6 +125,50 @@ const PACKAGES = [
     ]
   },
   {
+    id: 'vip-traditional-arabic',
+    category: 'vip',
+    title: 'VIP Traditional Arabic Safari (Private)',
+    tag: 'EXCLUSIVE ARABIC LUXURY',
+    rating: '5.0 (195 reviews)',
+    duration: '6–7 Hours • 2:30 PM Pickup',
+    priceAed: 999,
+    unit: '/ vehicle (up to 6 pax)',
+    image: 'assets/images/camel_falcon.jpg',
+    popular: false,
+    features: [
+      'Private Land Cruiser 4x4 SUV Pick-up & Drop-off',
+      'Authentic Traditional Arabic Bedouin Setup',
+      '35+ Min Deep Red Dune Bashing & Sandboarding',
+      'Gourmet Live BBQ Buffet & Seafood Feast',
+      'Falcon Photo Opportunity & Arabic Costume',
+      'VIP Seating & Unlimited Drinks, Coffee & Shisha',
+      '7 Live Performances: Belly Dance, Fire Show & Tanoura',
+      'Flat Rate per Vehicle (Up to 6 Guests Included)'
+    ]
+  },
+  {
+    id: 'private-camp-setup',
+    category: 'vip',
+    title: 'Private Desert Camp Setup',
+    tag: 'ULTIMATE PRIVATE OASIS',
+    rating: '5.0 (88 reviews)',
+    duration: '7 Hours • 2:00 PM Pickup',
+    priceAed: 2599,
+    unit: '/ setup (private camp)',
+    image: 'assets/images/vip_camp.jpg',
+    popular: false,
+    features: [
+      'Exclusive 100% Private Desert Camp Setup',
+      'Dedicated Luxury Fleet Pick-up & Drop-off',
+      'Private Chef & Tailored Gourmet Dining Menu',
+      'Private Live Show Performances & Fire Artist',
+      'Private Dune Bashing, Sandboarding & Quad Access',
+      'Dedicated Private Butler & Waiter Service',
+      'Custom Setup for Birthdays, Proposals & Events',
+      'Complete Privacy in the Deep Lehbab Red Dunes'
+    ]
+  },
+  {
     id: 'evening-standard',
     category: 'evening',
     title: 'Evening Standard Safari',
@@ -349,7 +393,7 @@ function calculateBookingTotal() {
   const pkg = PACKAGES.find(p => p.id === selectedPackageId) || PACKAGES[0];
   let basePrice = pkg.priceAed;
   
-  const isVehicleFlat = pkg.unit.includes('vehicle');
+  const isVehicleFlat = pkg.unit.includes('vehicle') || pkg.unit.includes('setup');
   
   // Calculate Adults & Children
   let totalAed = isVehicleFlat 
@@ -374,16 +418,16 @@ function calculateBookingTotal() {
   
   if (adultSub) {
     adultSub.textContent = isVehicleFlat 
-      ? `Flat Rate: ${formatPrice(basePrice)} (up to 6 guests)`
+      ? `Flat Rate: ${formatPrice(basePrice)}`
       : `${adultCount} × ${formatPrice(basePrice)}`;
   }
   if (childSub) {
     childSub.textContent = isVehicleFlat 
-      ? `Included in vehicle rate`
+      ? `Included in flat rate`
       : `${childCount} × ${formatPrice(basePrice * 0.75)}`;
   }
   if (transportSub) {
-    transportSub.textContent = isVehicleFlat ? 'Private SUV Included' : (transportType === 'private' ? formatPrice(400) : 'Free Included');
+    transportSub.textContent = isVehicleFlat ? 'Private Transport Included' : (transportType === 'private' ? formatPrice(400) : 'Free Included');
   }
   if (grandTotalEl) grandTotalEl.textContent = formatPrice(totalAed);
   
