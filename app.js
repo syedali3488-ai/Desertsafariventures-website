@@ -69,7 +69,7 @@ const PACKAGES = [
     duration: '4 Hours • 3:30 PM Pickup',
     priceAed: 479,
     unit: '/ vehicle (up to 6 pax)',
-    image: 'assets/images/hero.jpg',
+    image: 'assets/images/buggy_canam_action.jpg',
     popular: false,
     features: [
       'Private 4x4 SUV Pickup & Drop-off (3:30 PM – 7:30 PM)',
@@ -133,7 +133,7 @@ const PACKAGES = [
     duration: '6–7 Hours • 2:30 PM Pickup',
     priceAed: 999,
     unit: '/ vehicle (up to 6 pax)',
-    image: 'assets/images/camel_falcon.jpg',
+    image: 'assets/images/falcon_sunset_portrait.jpg',
     popular: false,
     features: [
       'Private Land Cruiser 4x4 SUV Pick-up & Drop-off',
@@ -155,7 +155,7 @@ const PACKAGES = [
     duration: '7 Hours • 2:00 PM Pickup',
     priceAed: 2599,
     unit: '/ setup (private camp)',
-    image: 'assets/images/vip_camp.jpg',
+    image: 'assets/images/group_quad_adventure.jpg',
     popular: false,
     features: [
       'Exclusive 100% Private Desert Camp Setup',
@@ -238,7 +238,7 @@ const PACKAGES = [
     duration: '4 Hours • 5:00 PM Camp Arrival',
     priceAed: 35,
     unit: '/ person',
-    image: 'assets/images/show_bbq.jpg',
+    image: 'assets/images/couple_quad_arabic.jpg',
     popular: false,
     features: [
       'Drive Your Own Vehicle Directly to Desert Camp',
@@ -258,7 +258,7 @@ const PACKAGES = [
     duration: '4 Hours • 5:00 PM Camp Arrival',
     priceAed: 59,
     unit: '/ person',
-    image: 'assets/images/hero.jpg',
+    image: 'assets/images/dune_buggy_carving.jpg',
     popular: false,
     features: [
       'Drive Your Own Vehicle Directly to Desert Camp',
