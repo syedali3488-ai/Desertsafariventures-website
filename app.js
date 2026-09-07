@@ -196,7 +196,7 @@ const PACKAGES = [
     tag: 'ULTIMATE THRILL',
     rating: '4.9 (250 reviews)',
     duration: '7 Hours • 2:30 PM Pickup',
-    priceAed: 199,
+    priceAed: 299,
     unit: '/ person',
     image: 'assets/images/quad_buggy.jpg',
     popular: false,
