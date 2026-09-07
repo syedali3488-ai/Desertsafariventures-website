@@ -45,7 +45,7 @@ const PACKAGES = [
     tag: '★ MOST BOOKED',
     rating: '4.9 (420 reviews)',
     duration: '6–7 Hours • 3:00 PM Pickup',
-    priceAed: 119,
+    priceAed: 129,
     unit: '/ person',
     image: 'assets/images/hero.jpg',
     popular: true,
@@ -58,6 +58,48 @@ const PACKAGES = [
       '3 Live Shows: Tanoura, Fire Show & Belly Dance',
       'Camel Ride & Henna Painting for Ladies',
       'Unlimited Soft Drinks, Arabic Coffee & Water'
+    ]
+  },
+  {
+    id: 'evening-short',
+    category: 'short',
+    title: 'Evening Short Desert Safari (Private)',
+    tag: 'NO CAMP • PRIVATE SUNSET',
+    rating: '4.9 (384 reviews)',
+    duration: '4 Hours • 3:30 PM Pickup',
+    priceAed: 479,
+    unit: '/ vehicle (up to 6 pax)',
+    image: 'assets/images/hero.jpg',
+    popular: false,
+    features: [
+      'Private 4x4 SUV Pickup & Drop-off (3:30 PM – 7:30 PM)',
+      '45–60 Min High-Dune Bashing (Lehbab Red Dunes)',
+      'Sandboarding + 30-Min Sunset Photo Session',
+      'Short Camel Ride Experience & Arabian Coffee',
+      'Desert Focus — Skip the Camp, BBQ & Shows',
+      'Back at Hotel by 7:30 PM for Evening Dinner',
+      'Flat Rate per Vehicle (Up to 6 Guests Included)'
+    ]
+  },
+  {
+    id: 'morning-short',
+    category: 'short',
+    title: 'Morning Short Desert Safari (Private)',
+    tag: 'FAST MORNING ADVENTURE',
+    rating: '4.9 (384 reviews)',
+    duration: '4 Hours • 8:00 AM Pickup',
+    priceAed: 449,
+    unit: '/ vehicle (up to 6 pax)',
+    image: 'assets/images/camel_falcon.jpg',
+    popular: false,
+    features: [
+      'Private 4x4 SUV Pickup & Return (8:00 AM – 12:00 PM)',
+      '30–45 Min Lehbab Red Dune Bashing',
+      'Sandboarding Down High Red Dunes',
+      'Camel Ride & Scenic Desert Photo Stop',
+      'Arabic Coffee, Dates & Bottled Water Provided',
+      'Back to Hotel by Noon for Afternoon Plans',
+      'Flat Rate per Vehicle (Up to 6 Guests Included)'
     ]
   },
   {
@@ -267,11 +309,15 @@ function calculateBookingTotal() {
   const pkg = PACKAGES.find(p => p.id === selectedPackageId) || PACKAGES[0];
   let basePrice = pkg.priceAed;
   
-  // Calculate Adults & Children (Children 25% discount)
-  let totalAed = (adultCount * basePrice) + (childCount * basePrice * 0.75);
+  const isVehicleFlat = pkg.unit.includes('vehicle');
   
-  // Transport upgrade: Private SUV (+400 AED flat)
-  if (transportType === 'private') {
+  // Calculate Adults & Children
+  let totalAed = isVehicleFlat 
+    ? Math.ceil((adultCount + childCount) / 6) * basePrice
+    : (adultCount * basePrice) + (childCount * basePrice * 0.75);
+  
+  // Transport upgrade: Private SUV (+400 AED flat for sharing packages)
+  if (transportType === 'private' && !isVehicleFlat) {
     totalAed += 400;
   }
   
@@ -286,9 +332,19 @@ function calculateBookingTotal() {
   const transportSub = document.getElementById('subtotalTransport');
   const grandTotalEl = document.getElementById('grandTotalEl');
   
-  if (adultSub) adultSub.textContent = `${adultCount} × ${formatPrice(basePrice)}`;
-  if (childSub) childSub.textContent = `${childCount} × ${formatPrice(basePrice * 0.75)}`;
-  if (transportSub) transportSub.textContent = transportType === 'private' ? formatPrice(400) : 'Free Included';
+  if (adultSub) {
+    adultSub.textContent = isVehicleFlat 
+      ? `Flat Rate: ${formatPrice(basePrice)} (up to 6 guests)`
+      : `${adultCount} × ${formatPrice(basePrice)}`;
+  }
+  if (childSub) {
+    childSub.textContent = isVehicleFlat 
+      ? `Included in vehicle rate`
+      : `${childCount} × ${formatPrice(basePrice * 0.75)}`;
+  }
+  if (transportSub) {
+    transportSub.textContent = isVehicleFlat ? 'Private SUV Included' : (transportType === 'private' ? formatPrice(400) : 'Free Included');
+  }
   if (grandTotalEl) grandTotalEl.textContent = formatPrice(totalAed);
   
   return { pkg, totalAed };

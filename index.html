@@ -88,7 +88,7 @@
 
       <div class="hero-cta-group">
         <button class="btn btn-primary" onclick="openBookingDrawer('evening-premium')">
-          <span>Book Premium Safari • From <strong data-price-aed="119">AED 119</strong></span>
+          <span>Book Premium Safari • From <strong data-price-aed="129">AED 129</strong></span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 8h10M9 4l4 4-4 4"/>
           </svg>
@@ -168,6 +168,7 @@
       <div class="filter-tabs">
         <button class="tab-btn active" data-category="all">All Packages</button>
         <button class="tab-btn" data-category="evening">Evening Safaris</button>
+        <button class="tab-btn" data-category="short">Short Tours</button>
         <button class="tab-btn" data-category="vip">VIP Luxury</button>
         <button class="tab-btn" data-category="morning">Morning & Sunrise</button>
         <button class="tab-btn" data-category="combos">Quad Combos</button>
@@ -194,7 +195,7 @@
             <tr>
               <th>Feature / Inclusion</th>
               <th>Standard (AED 79)</th>
-              <th class="highlight">Premium (AED 119) ★</th>
+              <th class="highlight">Premium (AED 129) ★</th>
               <th>VIP (AED 299)</th>
             </tr>
           </thead>
@@ -585,7 +586,9 @@
           <div class="form-group">
             <label class="form-label">Select Package</label>
             <select class="form-control" id="bookPackageSelect">
-              <option value="evening-premium">Evening Premium Safari (AED 119)</option>
+              <option value="evening-premium">Evening Premium Safari (AED 129)</option>
+              <option value="evening-short">Evening Short Desert Safari - Private (AED 479)</option>
+              <option value="morning-short">Morning Short Desert Safari - Private (AED 449)</option>
               <option value="evening-vip">Evening VIP Luxury Safari (AED 299)</option>
               <option value="evening-standard">Evening Standard Safari (AED 79)</option>
               <option value="combo-quad-safari">Quad Bike + Evening Safari Combo (AED 199)</option>
@@ -652,7 +655,7 @@
           <div class="price-breakdown">
             <div class="breakdown-row">
               <span>Adults Total</span>
-              <span id="subtotalAdults">2 × AED 119</span>
+              <span id="subtotalAdults">2 × AED 129</span>
             </div>
             <div class="breakdown-row">
               <span>Children Total</span>
