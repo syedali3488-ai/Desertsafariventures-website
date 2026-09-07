@@ -186,6 +186,46 @@ const PACKAGES = [
     ]
   },
   {
+    id: 'selfdrive-standard',
+    category: 'selfdrive',
+    title: 'Self-Drive Standard Safari Pass',
+    tag: 'BEST VALUE ENTRY',
+    rating: '4.8 (310 reviews)',
+    duration: '4 Hours • 5:00 PM Camp Arrival',
+    priceAed: 35,
+    unit: '/ person',
+    image: 'assets/images/show_bbq.jpg',
+    popular: false,
+    features: [
+      'Drive Your Own Vehicle Directly to Desert Camp',
+      'Authentic Bedouin Camp Access & Carpet Seating',
+      'Full BBQ Buffet Dinner (Veg & Non-Veg, Halal)',
+      '3 Live Shows: Tanoura, Fire Show & Belly Dance',
+      'Short Camel Ride & Henna Painting for Ladies',
+      'Complimentary Tea, Coffee & Bottled Water'
+    ]
+  },
+  {
+    id: 'selfdrive-premium',
+    category: 'selfdrive',
+    title: 'Self-Drive Premium Safari Pass',
+    tag: 'PREMIUM CAMP ACCESS',
+    rating: '4.9 (240 reviews)',
+    duration: '4 Hours • 5:00 PM Camp Arrival',
+    priceAed: 59,
+    unit: '/ person',
+    image: 'assets/images/hero.jpg',
+    popular: false,
+    features: [
+      'Drive Your Own Vehicle Directly to Desert Camp',
+      'Priority Bedouin Camp Seating & Cushion Majlis',
+      '5-Star Live BBQ Buffet (Veg, Non-Veg, Halal)',
+      '3 Live Stage Shows: Tanoura, Fire Show & Belly Dance',
+      'Sandboarding & Golden Hour Sunset Stop',
+      'Unlimited Soft Drinks, Arabian Coffee & Water'
+    ]
+  },
+  {
     id: 'selfdrive-vip',
     category: 'selfdrive',
     title: 'Self-Drive VIP Camp Pass',
