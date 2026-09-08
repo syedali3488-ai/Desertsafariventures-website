@@ -112,6 +112,104 @@
     </div>
   </section>
 
+  <!-- INLINE BOOKING SECTION ABOVE FOOTER -->
+  <section style="padding: 60px 0; background: var(--bg-darker); border-top: 1px solid var(--border-subtle);">
+    <div class="container" style="max-width: 680px;">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <h2 style="font-family: var(--font-heading); font-size: 32px; font-weight: 800; margin-bottom: 10px;">
+          Reserve Your <span class="gradient-text-gold">Desert Safari</span>
+        </h2>
+        <p style="color: var(--text-muted); font-size: 15px;">
+          Select your package tier below to book directly with Dubai DET-licensed operator. Pay on arrival with zero booking fees.
+        </p>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-lg);">
+        <form id="compareInlineBookingForm" onsubmit="submitBookingToWhatsapp(event)">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label">Select Package</label>
+            <select class="form-control" id="bookPackageSelect" style="width: 100%;">
+              <option value="evening-premium">Evening Premium Safari (AED 129)</option>
+              <option value="evening-short">Evening Short Desert Safari - Private (AED 479)</option>
+              <option value="morning-short">Morning Short Desert Safari - Private (AED 449)</option>
+              <option value="evening-vip">Evening VIP Luxury Safari (AED 299)</option>
+              <option value="vip-traditional-arabic">VIP Traditional Arabic Safari - Private (AED 999)</option>
+              <option value="private-camp-setup">Private Desert Camp Setup (AED 2599)</option>
+              <option value="evening-standard">Evening Standard Safari (AED 79)</option>
+              <option value="combo-quad-safari">Quad Bike + Evening Safari Combo (AED 299)</option>
+              <option value="sunrise-safari">Sunrise Private Safari (AED 419)</option>
+              <option value="selfdrive-standard">Self-Drive Standard Pass (AED 35)</option>
+              <option value="selfdrive-premium">Self-Drive Premium Pass (AED 59)</option>
+              <option value="selfdrive-vip">Self-Drive VIP Pass (AED 75)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label">Safari Date</label>
+            <input type="date" class="form-control" id="bookDate" style="width: 100%;" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label">Lead Guest Name</label>
+            <input type="text" class="form-control" id="bookName" placeholder="Full Name" style="width: 100%;" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label class="form-label">Hotel / Pick-Up Location</label>
+            <input type="text" class="form-control" id="bookHotel" placeholder="Hotel Name" style="width: 100%;" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 16px; padding: 14px;">
+            <span>Reserve via WhatsApp</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING MODAL OVERLAY -->
+  <div class="modal-overlay" id="bookingModal" onclick="closeBookingDrawer()">
+    <div class="booking-drawer" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <h3 class="drawer-title">Reserve Desert Safari</h3>
+        <button class="close-btn" onclick="closeBookingDrawer()" aria-label="Close">✕</button>
+      </div>
+
+      <div class="drawer-body">
+        <form id="bookingForm" onsubmit="submitBookingToWhatsapp(event)">
+          <div class="form-group">
+            <label class="form-label">Select Package</label>
+            <select class="form-control" id="bookPackageSelectModal">
+              <option value="evening-premium">Evening Premium Safari (AED 129)</option>
+              <option value="evening-short">Evening Short Desert Safari - Private (AED 479)</option>
+              <option value="morning-short">Morning Short Desert Safari - Private (AED 449)</option>
+              <option value="evening-vip">Evening VIP Luxury Safari (AED 299)</option>
+              <option value="vip-traditional-arabic">VIP Traditional Arabic Safari - Private (AED 999)</option>
+              <option value="private-camp-setup">Private Desert Camp Setup (AED 2599)</option>
+              <option value="evening-standard">Evening Standard Safari (AED 79)</option>
+              <option value="combo-quad-safari">Quad Bike + Evening Safari Combo (AED 299)</option>
+              <option value="sunrise-safari">Sunrise Private Safari (AED 419)</option>
+              <option value="selfdrive-standard">Self-Drive Standard Pass (AED 35)</option>
+              <option value="selfdrive-premium">Self-Drive Premium Pass (AED 59)</option>
+              <option value="selfdrive-vip">Self-Drive VIP Pass (AED 75)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Safari Date</label>
+            <input type="date" class="form-control" id="bookDateModal" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Lead Guest Name</label>
+            <input type="text" class="form-control" id="bookNameModal" placeholder="Full Name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hotel / Pick-Up Location</label>
+            <input type="text" class="form-control" id="bookHotelModal" placeholder="Hotel Name" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <span>Reserve via WhatsApp</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -163,50 +261,6 @@
       </div>
     </div>
   </footer>
-
-  <div class="drawer-overlay" id="bookingDrawerOverlay" onclick="closeBookingDrawer()">
-    <div class="booking-drawer" onclick="event.stopPropagation()">
-      <div class="drawer-header">
-        <h3 class="drawer-title">Reserve Desert Safari</h3>
-        <button class="close-btn" onclick="closeBookingDrawer()" aria-label="Close">✕</button>
-      </div>
-
-      <div class="drawer-body">
-        <form id="bookingForm" onsubmit="submitBookingToWhatsapp(event)">
-          <div class="form-group">
-            <label class="form-label">Select Package</label>
-            <select class="form-control" id="bookPackageSelect">
-              <option value="evening-premium">Evening Premium Safari (AED 129)</option>
-              <option value="evening-short">Evening Short Desert Safari - Private (AED 479)</option>
-              <option value="morning-short">Morning Short Desert Safari - Private (AED 449)</option>
-              <option value="evening-vip">Evening VIP Luxury Safari (AED 299)</option>
-              <option value="vip-traditional-arabic">VIP Traditional Arabic Safari - Private (AED 999)</option>
-              <option value="private-camp-setup">Private Desert Camp Setup (AED 2599)</option>
-              <option value="evening-standard">Evening Standard Safari (AED 79)</option>
-              <option value="selfdrive-standard">Self-Drive Standard Pass (AED 35)</option>
-              <option value="selfdrive-premium">Self-Drive Premium Pass (AED 59)</option>
-              <option value="selfdrive-vip">Self-Drive VIP Pass (AED 75)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Safari Date</label>
-            <input type="date" class="form-control" id="bookDate" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Lead Guest Name</label>
-            <input type="text" class="form-control" id="bookName" placeholder="Full Name" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Hotel / Pick-Up Location</label>
-            <input type="text" class="form-control" id="bookHotel" placeholder="Hotel Name" required>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%;">
-            <span>Reserve via WhatsApp</span>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
 
   <a href="https://wa.me/971544508581" target="_blank" rel="noopener" class="floating-wa" aria-label="Contact on WhatsApp">💬</a>
   <script src="app.js"></script>

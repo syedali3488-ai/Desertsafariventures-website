@@ -1157,7 +1157,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* BOOKING DRAWER & MODAL */
-.modal-overlay {
+.modal-overlay,
+.drawer-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
@@ -1172,7 +1173,8 @@ h1, h2, h3, h4, h5, h6 {
   padding: 20px;
 }
 
-.modal-overlay.show {
+.modal-overlay.show,
+.drawer-overlay.show {
   opacity: 1;
   visibility: visible;
 }

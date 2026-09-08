@@ -368,13 +368,13 @@ function openBookingDrawer(pkgId = 'evening-premium') {
   const pkgSelect = document.getElementById('bookPackageSelect');
   if (pkgSelect) pkgSelect.value = pkgId;
   
-  const drawer = document.getElementById('bookingModal');
+  const drawer = document.getElementById('bookingModal') || document.getElementById('bookingDrawerOverlay');
   if (drawer) drawer.classList.add('show');
   calculateBookingTotal();
 }
 
 function closeBookingDrawer() {
-  const drawer = document.getElementById('bookingModal');
+  const drawer = document.getElementById('bookingModal') || document.getElementById('bookingDrawerOverlay');
   if (drawer) drawer.classList.remove('show');
 }
 
