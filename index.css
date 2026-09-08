@@ -877,14 +877,22 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 20px 24px;
   box-shadow: var(--shadow-sm);
   transition: var(--transition-fast);
+  display: flex;
+  gap: 24px;
+  align-items: center;
 }
 
 .timeline-content:hover {
   border-color: var(--bg-glass-border-amber);
   transform: translateX(4px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.15);
+}
+
+.timeline-body {
+  flex: 1;
 }
 
 .timeline-time {
@@ -904,6 +912,28 @@ h1, h2, h3, h4, h5, h6 {
 .timeline-desc {
   font-size: 14px;
   color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.timeline-img-wrap {
+  width: 220px;
+  height: 135px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.timeline-content:hover .timeline-img {
+  transform: scale(1.07);
 }
 
 /* WHY BOOK DIRECT SECTION */
@@ -1449,5 +1479,17 @@ h1, h2, h3, h4, h5, h6 {
 
   .timeline-node {
     left: 0;
+  }
+
+  .timeline-content {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .timeline-img-wrap {
+    width: 100%;
+    height: 170px;
   }
 }
