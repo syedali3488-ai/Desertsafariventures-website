@@ -218,7 +218,7 @@ const PACKAGES = [
     duration: '4 Hours • 4:30 AM Pickup',
     priceAed: 419,
     unit: '/ vehicle (up to 6 pax)',
-    image: 'assets/images/camel_falcon.jpg',
+    image: 'assets/images/sunrise_desert_safari.jpg',
     popular: false,
     features: [
       'Watch Sunrise Over Crisp Desert Sand Dunes',
@@ -278,7 +278,7 @@ const PACKAGES = [
     duration: '4 Hours • 5:00 PM Camp Arrival',
     priceAed: 75,
     unit: '/ person',
-    image: 'assets/images/vip_camp.jpg',
+    image: 'assets/images/selfdrive_vip_camp.jpg',
     popular: false,
     features: [
       'Drive Your Own Vehicle Directly to Camp',
