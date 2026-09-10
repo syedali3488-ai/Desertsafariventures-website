@@ -1647,3 +1647,32 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(0) scale(1);
   }
 }
+
+
+/* PAGE-SPECIFIC RESPONSIVE GRIDS */
+.contact-grid,
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.about-grid {
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 992px) {
+  .contact-grid,
+  .about-grid,
+  .detail-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
