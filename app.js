@@ -39,197 +39,6 @@ function updateAllPrices() {
 // PACKAGES DATA SOURCED FROM DUBAIDESERTVENTURES.COM
 const PACKAGES = [
   {
-    id: 'evening-premium',
-    category: 'evening',
-    title: 'Evening Premium Safari',
-    tag: '★ MOST BOOKED',
-    rating: '4.9 (420 reviews)',
-    duration: '6–7 Hours • 3:00 PM Pickup',
-    priceAed: 129,
-    unit: '/ person',
-    image: 'assets/images/hero.jpg',
-    popular: true,
-    features: [
-      '25–30 Min High-Dune Bashing (Lehbab Red Dunes)',
-      'Free 4x4 SUV Pickup & Drop-off from Hotel',
-      'Bedouin Camp Access & Priority Majlis Seating',
-      '5-Star Live BBQ Buffet (Veg, Non-Veg, Halal)',
-      'Sandboarding + Golden Hour Sunset Stop',
-      '3 Live Shows: Tanoura, Fire Show & Belly Dance',
-      'Camel Ride & Henna Painting for Ladies',
-      'Unlimited Soft Drinks, Arabic Coffee & Water'
-    ]
-  },
-  {
-    id: 'evening-short',
-    category: 'short',
-    title: 'Evening Short Desert Safari (Private)',
-    tag: 'NO CAMP • PRIVATE SUNSET',
-    rating: '4.9 (384 reviews)',
-    duration: '4 Hours • 3:30 PM Pickup',
-    priceAed: 479,
-    unit: '/ vehicle (up to 6 pax)',
-    image: 'assets/images/buggy_canam_action.jpg',
-    popular: false,
-    features: [
-      'Private 4x4 SUV Pickup & Drop-off (3:30 PM – 7:30 PM)',
-      '45–60 Min High-Dune Bashing (Lehbab Red Dunes)',
-      'Sandboarding + 30-Min Sunset Photo Session',
-      'Short Camel Ride Experience & Arabian Coffee',
-      'Desert Focus — Skip the Camp, BBQ & Shows',
-      'Back at Hotel by 7:30 PM for Evening Dinner',
-      'Flat Rate per Vehicle (Up to 6 Guests Included)'
-    ]
-  },
-  {
-    id: 'morning-short',
-    category: 'short',
-    title: 'Morning Short Desert Safari (Private)',
-    tag: 'FAST MORNING ADVENTURE',
-    rating: '4.9 (384 reviews)',
-    duration: '4 Hours • 8:00 AM Pickup',
-    priceAed: 449,
-    unit: '/ vehicle (up to 6 pax)',
-    image: 'assets/images/camel_falcon.jpg',
-    popular: false,
-    features: [
-      'Private 4x4 SUV Pickup & Return (8:00 AM – 12:00 PM)',
-      '30–45 Min Lehbab Red Dune Bashing',
-      'Sandboarding Down High Red Dunes',
-      'Camel Ride & Scenic Desert Photo Stop',
-      'Arabic Coffee, Dates & Bottled Water Provided',
-      'Back to Hotel by Noon for Afternoon Plans',
-      'Flat Rate per Vehicle (Up to 6 Guests Included)'
-    ]
-  },
-  {
-    id: 'evening-vip',
-    category: 'vip',
-    title: 'Evening VIP Safari',
-    tag: 'LUXURY & VIP SEATING',
-    rating: '5.0 (180 reviews)',
-    duration: '7 Hours • 2:30 PM Pickup',
-    priceAed: 299,
-    unit: '/ person',
-    image: 'assets/images/vip_camp.jpg',
-    popular: false,
-    features: [
-      'Extended Open-Desert Dune Bashing Route',
-      'Exclusive VIP Waiter-Served Chair Seating Area',
-      'Upgraded Gourmet BBQ Buffet & Live Grill',
-      'Falcon Photo Opportunity Included',
-      'Traditional Arabic Costume Photography',
-      'Double Live Performance Sessions (2x Each)',
-      'VIP Welcome Drinks, Dates & Fresh Snacks',
-      'Priority Camel Ride & Henna Table'
-    ]
-  },
-  {
-    id: 'vip-traditional-arabic',
-    category: 'vip',
-    title: 'VIP Traditional Arabic Safari (Private)',
-    tag: 'EXCLUSIVE ARABIC LUXURY',
-    rating: '5.0 (195 reviews)',
-    duration: '6–7 Hours • 2:30 PM Pickup',
-    priceAed: 999,
-    unit: '/ vehicle (up to 6 pax)',
-    image: 'assets/images/falcon_sunset_portrait.jpg',
-    popular: false,
-    features: [
-      'Private Land Cruiser 4x4 SUV Pick-up & Drop-off',
-      'Authentic Traditional Arabic Bedouin Setup',
-      '35+ Min Deep Red Dune Bashing & Sandboarding',
-      'Gourmet Live BBQ Buffet & Seafood Feast',
-      'Falcon Photo Opportunity & Arabic Costume',
-      'VIP Seating & Unlimited Drinks, Coffee & Shisha',
-      '7 Live Performances: Belly Dance, Fire Show & Tanoura',
-      'Flat Rate per Vehicle (Up to 6 Guests Included)'
-    ]
-  },
-  {
-    id: 'private-camp-setup',
-    category: 'vip',
-    title: 'Private Desert Camp Setup',
-    tag: 'ULTIMATE PRIVATE OASIS',
-    rating: '5.0 (88 reviews)',
-    duration: '7 Hours • 2:00 PM Pickup',
-    priceAed: 2599,
-    unit: '/ setup (private camp)',
-    image: 'assets/images/group_quad_adventure.jpg',
-    popular: false,
-    features: [
-      'Exclusive 100% Private Desert Camp Setup',
-      'Dedicated Luxury Fleet Pick-up & Drop-off',
-      'Private Chef & Tailored Gourmet Dining Menu',
-      'Private Live Show Performances & Fire Artist',
-      'Private Dune Bashing, Sandboarding & Quad Access',
-      'Dedicated Private Butler & Waiter Service',
-      'Custom Setup for Birthdays, Proposals & Events',
-      'Complete Privacy in the Deep Lehbab Red Dunes'
-    ]
-  },
-  {
-    id: 'evening-standard',
-    category: 'evening',
-    title: 'Evening Standard Safari',
-    tag: 'BEST VALUE ENTRY',
-    rating: '4.8 (310 reviews)',
-    duration: '6 Hours • 3:30 PM Pickup',
-    priceAed: 79,
-    unit: '/ person',
-    image: 'assets/images/show_bbq.jpg',
-    popular: false,
-    features: [
-      '15–20 Min Thrilling Dune Bashing',
-      'Sharing 4x4 Hotel Pickup & Drop-off',
-      'Traditional Carpet Majlis Camp Seating',
-      'Full BBQ Buffet Dinner (Veg & Non-Veg)',
-      'Live Tanoura & Belly Dance Entertainment',
-      'Sunset Photo Stop & Sandboarding',
-      'Camel Ride & Complimentary Tea/Coffee'
-    ]
-  },
-  {
-    id: 'combo-quad-safari',
-    category: 'combos',
-    title: 'Quad Bike + Evening Safari Combo',
-    tag: 'ULTIMATE THRILL',
-    rating: '4.9 (250 reviews)',
-    duration: '7 Hours • 2:30 PM Pickup',
-    priceAed: 299,
-    unit: '/ person',
-    image: 'assets/images/quad_buggy.jpg',
-    popular: false,
-    features: [
-      '30 Min Self-Drive Quad Bike (Yamaha 350cc)',
-      'Full Evening Premium Desert Safari Included',
-      'High-Dune Land Cruiser Dune Bashing',
-      '5-Star BBQ Dinner & Live Show Performances',
-      'Safety Helmet, Goggles & Briefing Provided',
-      'Hotel Pickup & Return Included'
-    ]
-  },
-  {
-    id: 'sunrise-safari',
-    category: 'morning',
-    title: 'Sunrise Desert Safari (Private)',
-    tag: 'EARLY BIRD SUNRISE',
-    rating: '4.9 (140 reviews)',
-    duration: '4 Hours • 4:30 AM Pickup',
-    priceAed: 419,
-    unit: '/ vehicle (up to 6 pax)',
-    image: 'assets/images/sunrise_desert_safari.jpg',
-    popular: false,
-    features: [
-      'Watch Sunrise Over Crisp Desert Sand Dunes',
-      'Private Land Cruiser Pick & Drop',
-      '30 Min Deep Dune Bashing Experience',
-      'Sandboarding & Sunrise Photography',
-      'Light Breakfast & Fresh Arabian Coffee',
-      'Peaceful Morning Desert Serenity'
-    ]
-  },
-  {
     id: 'selfdrive-standard',
     category: 'selfdrive',
     title: 'Self-Drive Standard Safari Pass',
@@ -287,6 +96,197 @@ const PACKAGES = [
       'All 3 Live Shows (Tanoura, Fire, Belly Dance)',
       'Camel Ride, Henna & Shisha Available'
     ]
+  },
+  {
+    id: 'evening-standard',
+    category: 'evening',
+    title: 'Evening Standard Safari',
+    tag: 'BEST VALUE ENTRY',
+    rating: '4.8 (310 reviews)',
+    duration: '6 Hours • 3:30 PM Pickup',
+    priceAed: 79,
+    unit: '/ person',
+    image: 'assets/images/show_bbq.jpg',
+    popular: false,
+    features: [
+      '15–20 Min Thrilling Dune Bashing',
+      'Sharing 4x4 Hotel Pickup & Drop-off',
+      'Traditional Carpet Majlis Camp Seating',
+      'Full BBQ Buffet Dinner (Veg & Non-Veg)',
+      'Live Tanoura & Belly Dance Entertainment',
+      'Sunset Photo Stop & Sandboarding',
+      'Camel Ride & Complimentary Tea/Coffee'
+    ]
+  },
+  {
+    id: 'evening-premium',
+    category: 'evening',
+    title: 'Evening Premium Safari',
+    tag: '★ MOST BOOKED',
+    rating: '4.9 (420 reviews)',
+    duration: '6–7 Hours • 3:00 PM Pickup',
+    priceAed: 129,
+    unit: '/ person',
+    image: 'assets/images/hero.jpg',
+    popular: true,
+    features: [
+      '25–30 Min High-Dune Bashing (Lehbab Red Dunes)',
+      'Free 4x4 SUV Pickup & Drop-off from Hotel',
+      'Bedouin Camp Access & Priority Majlis Seating',
+      '5-Star Live BBQ Buffet (Veg, Non-Veg, Halal)',
+      'Sandboarding + Golden Hour Sunset Stop',
+      '3 Live Shows: Tanoura, Fire Show & Belly Dance',
+      'Camel Ride & Henna Painting for Ladies',
+      'Unlimited Soft Drinks, Arabic Coffee & Water'
+    ]
+  },
+  {
+    id: 'evening-vip',
+    category: 'vip',
+    title: 'Evening VIP Safari',
+    tag: 'LUXURY & VIP SEATING',
+    rating: '5.0 (180 reviews)',
+    duration: '7 Hours • 2:30 PM Pickup',
+    priceAed: 299,
+    unit: '/ person',
+    image: 'assets/images/vip_camp.jpg',
+    popular: false,
+    features: [
+      'Extended Open-Desert Dune Bashing Route',
+      'Exclusive VIP Waiter-Served Chair Seating Area',
+      'Upgraded Gourmet BBQ Buffet & Live Grill',
+      'Falcon Photo Opportunity Included',
+      'Traditional Arabic Costume Photography',
+      'Double Live Performance Sessions (2x Each)',
+      'VIP Welcome Drinks, Dates & Fresh Snacks',
+      'Priority Camel Ride & Henna Table'
+    ]
+  },
+  {
+    id: 'combo-quad-safari',
+    category: 'combos',
+    title: 'Quad Bike + Evening Safari Combo',
+    tag: 'ULTIMATE THRILL',
+    rating: '4.9 (250 reviews)',
+    duration: '7 Hours • 2:30 PM Pickup',
+    priceAed: 299,
+    unit: '/ person',
+    image: 'assets/images/quad_buggy.jpg',
+    popular: false,
+    features: [
+      '30 Min Self-Drive Quad Bike (Yamaha 350cc)',
+      'Full Evening Premium Desert Safari Included',
+      'High-Dune Land Cruiser Dune Bashing',
+      '5-Star BBQ Dinner & Live Show Performances',
+      'Safety Helmet, Goggles & Briefing Provided',
+      'Hotel Pickup & Return Included'
+    ]
+  },
+  {
+    id: 'sunrise-safari',
+    category: 'morning',
+    title: 'Sunrise Desert Safari (Private)',
+    tag: 'EARLY BIRD SUNRISE',
+    rating: '4.9 (140 reviews)',
+    duration: '4 Hours • 4:30 AM Pickup',
+    priceAed: 419,
+    unit: '/ vehicle (up to 6 pax)',
+    image: 'assets/images/sunrise_desert_safari.jpg',
+    popular: false,
+    features: [
+      'Watch Sunrise Over Crisp Desert Sand Dunes',
+      'Private Land Cruiser Pick & Drop',
+      '30 Min Deep Dune Bashing Experience',
+      'Sandboarding & Sunrise Photography',
+      'Light Breakfast & Fresh Arabian Coffee',
+      'Peaceful Morning Desert Serenity'
+    ]
+  },
+  {
+    id: 'morning-short',
+    category: 'short',
+    title: 'Morning Short Desert Safari (Private)',
+    tag: 'FAST MORNING ADVENTURE',
+    rating: '4.9 (384 reviews)',
+    duration: '4 Hours • 8:00 AM Pickup',
+    priceAed: 449,
+    unit: '/ vehicle (up to 6 pax)',
+    image: 'assets/images/camel_falcon.jpg',
+    popular: false,
+    features: [
+      'Private 4x4 SUV Pickup & Return (8:00 AM – 12:00 PM)',
+      '30–45 Min Lehbab Red Dune Bashing',
+      'Sandboarding Down High Red Dunes',
+      'Camel Ride & Scenic Desert Photo Stop',
+      'Arabic Coffee, Dates & Bottled Water Provided',
+      'Back to Hotel by Noon for Afternoon Plans',
+      'Flat Rate per Vehicle (Up to 6 Guests Included)'
+    ]
+  },
+  {
+    id: 'evening-short',
+    category: 'short',
+    title: 'Evening Short Desert Safari (Private)',
+    tag: 'NO CAMP • PRIVATE SUNSET',
+    rating: '4.9 (384 reviews)',
+    duration: '4 Hours • 3:30 PM Pickup',
+    priceAed: 479,
+    unit: '/ vehicle (up to 6 pax)',
+    image: 'assets/images/buggy_canam_action.jpg',
+    popular: false,
+    features: [
+      'Private 4x4 SUV Pickup & Drop-off (3:30 PM – 7:30 PM)',
+      '45–60 Min High-Dune Bashing (Lehbab Red Dunes)',
+      'Sandboarding + 30-Min Sunset Photo Session',
+      'Short Camel Ride Experience & Arabian Coffee',
+      'Desert Focus — Skip the Camp, BBQ & Shows',
+      'Back at Hotel by 7:30 PM for Evening Dinner',
+      'Flat Rate per Vehicle (Up to 6 Guests Included)'
+    ]
+  },
+  {
+    id: 'vip-traditional-arabic',
+    category: 'vip',
+    title: 'VIP Traditional Arabic Safari (Private)',
+    tag: 'EXCLUSIVE ARABIC LUXURY',
+    rating: '5.0 (195 reviews)',
+    duration: '6–7 Hours • 2:30 PM Pickup',
+    priceAed: 999,
+    unit: '/ vehicle (up to 6 pax)',
+    image: 'assets/images/falcon_sunset_portrait.jpg',
+    popular: false,
+    features: [
+      'Private Land Cruiser 4x4 SUV Pick-up & Drop-off',
+      'Authentic Traditional Arabic Bedouin Setup',
+      '35+ Min Deep Red Dune Bashing & Sandboarding',
+      'Gourmet Live BBQ Buffet & Seafood Feast',
+      'Falcon Photo Opportunity & Arabic Costume',
+      'VIP Seating & Unlimited Drinks, Coffee & Shisha',
+      '7 Live Performances: Belly Dance, Fire Show & Tanoura',
+      'Flat Rate per Vehicle (Up to 6 Guests Included)'
+    ]
+  },
+  {
+    id: 'private-camp-setup',
+    category: 'vip',
+    title: 'Private Desert Camp Setup',
+    tag: 'ULTIMATE PRIVATE OASIS',
+    rating: '5.0 (88 reviews)',
+    duration: '7 Hours • 2:00 PM Pickup',
+    priceAed: 2599,
+    unit: '/ setup (private camp)',
+    image: 'assets/images/group_quad_adventure.jpg',
+    popular: false,
+    features: [
+      'Exclusive 100% Private Desert Camp Setup',
+      'Dedicated Luxury Fleet Pick-up & Drop-off',
+      'Private Chef & Tailored Gourmet Dining Menu',
+      'Private Live Show Performances & Fire Artist',
+      'Private Dune Bashing, Sandboarding & Quad Access',
+      'Dedicated Private Butler & Waiter Service',
+      'Custom Setup for Birthdays, Proposals & Events',
+      'Complete Privacy in the Deep Lehbab Red Dunes'
+    ]
   }
 ];
 
@@ -298,8 +298,11 @@ function renderPackages(filter = 'all') {
   const filtered = filter === 'all' 
     ? PACKAGES 
     : PACKAGES.filter(p => p.category === filter);
+
+  // Ensure cheap/standard packages are at top and costly/premium packages at bottom
+  const sorted = [...filtered].sort((a, b) => a.priceAed - b.priceAed);
     
-  container.innerHTML = filtered.map(pkg => `
+  container.innerHTML = sorted.map(pkg => `
     <div class="package-card ${pkg.popular ? 'popular' : ''}">
       ${pkg.popular ? `<span class="badge-popular">${pkg.tag}</span>` : ''}
       <div class="package-img-wrap">
@@ -340,148 +343,6 @@ function renderPackages(filter = 'all') {
       </div>
     </div>
   `).join('');
-}
-
-// FILTER TABS LOGIC
-function initFilterTabs() {
-  const tabs = document.querySelectorAll('.tab-btn');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const cat = tab.getAttribute('data-category');
-      renderPackages(cat);
-    });
-  });
-}
-
-// BOOKING DRAWER & CALCULATOR
-let selectedPackageId = 'evening-premium';
-let adultCount = 2;
-let childCount = 0;
-let transportType = 'sharing';
-let addonQuad = 'none';
-let addonFalcon = false;
-
-function openBookingDrawer(pkgId = 'evening-premium') {
-  selectedPackageId = pkgId;
-  const pkgSelect = document.getElementById('bookPackageSelect');
-  if (pkgSelect) pkgSelect.value = pkgId;
-  
-  const drawer = document.getElementById('bookingModal') || document.getElementById('bookingDrawerOverlay');
-  if (drawer) drawer.classList.add('show');
-  calculateBookingTotal();
-}
-
-function closeBookingDrawer() {
-  const drawer = document.getElementById('bookingModal') || document.getElementById('bookingDrawerOverlay');
-  if (drawer) drawer.classList.remove('show');
-}
-
-function updateCounter(type, delta) {
-  if (type === 'adult') {
-    adultCount = Math.max(1, adultCount + delta);
-    document.getElementById('adultCountEl').textContent = adultCount;
-  } else if (type === 'child') {
-    childCount = Math.max(0, childCount + delta);
-    document.getElementById('childCountEl').textContent = childCount;
-  }
-  calculateBookingTotal();
-}
-
-function calculateBookingTotal() {
-  const pkg = PACKAGES.find(p => p.id === selectedPackageId) || PACKAGES[0];
-  let basePrice = pkg.priceAed;
-  
-  const isVehicleFlat = pkg.unit.includes('vehicle') || pkg.unit.includes('setup');
-  
-  // Calculate Adults & Children
-  let totalAed = isVehicleFlat 
-    ? Math.ceil((adultCount + childCount) / 6) * basePrice
-    : (adultCount * basePrice) + (childCount * basePrice * 0.75);
-  
-  // Transport upgrade: Private SUV (+400 AED flat for sharing packages)
-  if (transportType === 'private' && !isVehicleFlat) {
-    totalAed += 400;
-  }
-  
-  // Addons
-  if (addonQuad === '30m') totalAed += (adultCount + childCount) * 150;
-  if (addonQuad === '60m') totalAed += (adultCount + childCount) * 250;
-  if (addonFalcon) totalAed += (adultCount + childCount) * 50;
-  
-  // Update breakdown DOM
-  const adultSub = document.getElementById('subtotalAdults');
-  const childSub = document.getElementById('subtotalChildren');
-  const transportSub = document.getElementById('subtotalTransport');
-  const grandTotalEl = document.getElementById('grandTotalEl');
-  
-  if (adultSub) {
-    adultSub.textContent = isVehicleFlat 
-      ? `Flat Rate: ${formatPrice(basePrice)}`
-      : `${adultCount} × ${formatPrice(basePrice)}`;
-  }
-  if (childSub) {
-    childSub.textContent = isVehicleFlat 
-      ? `Included in flat rate`
-      : `${childCount} × ${formatPrice(basePrice * 0.75)}`;
-  }
-  if (transportSub) {
-    transportSub.textContent = isVehicleFlat ? 'Private Transport Included' : (transportType === 'private' ? formatPrice(400) : 'Free Included');
-  }
-  if (grandTotalEl) grandTotalEl.textContent = formatPrice(totalAed);
-  
-  return { pkg, totalAed };
-}
-
-// WHATSAPP RESERVATION GENERATOR
-function submitBookingToWhatsapp(e) {
-  if (e) e.preventDefault();
-  
-  const { pkg, totalAed } = calculateBookingTotal();
-  const name = document.getElementById('bookName')?.value || 'Guest';
-  const date = document.getElementById('bookDate')?.value || 'Upcoming Date';
-  const hotel = document.getElementById('bookHotel')?.value || 'Dubai Hotel';
-  
-  const message = `Hello Desert Safari Ventures! 🐪\n\nI would like to book a safari with you:\n` +
-    `• Package: *${pkg.title}*\n` +
-    `• Date: *${date}*\n` +
-    `• Guests: *${adultCount} Adults, ${childCount} Children*\n` +
-    `• Transport: *${transportType === 'private' ? 'Private 4x4 SUV (+400 AED)' : 'Sharing 4x4 Pickup (Included)'}*\n` +
-    `• Add-ons: *${addonQuad !== 'none' ? 'Quad Bike ' + addonQuad : 'None'}*\n` +
-    `• Pick-up Location: *${hotel}*\n` +
-    `• Lead Guest: *${name}*\n` +
-    `• Estimated Total: *${formatPrice(totalAed)} (Pay on Arrival)*\n\n` +
-    `Please confirm my slot! Thank you.`;
-    
-  const encoded = encodeURIComponent(message);
-  window.open(`https://wa.me/971544508581?text=${encoded}`, '_blank');
-}
-
-// FAQ SEARCH & ACCORDION
-function initFaqAccordion() {
-  const items = document.querySelectorAll('.faq-item');
-  items.forEach(item => {
-    const q = item.querySelector('.faq-question');
-    if (q) {
-      q.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-        items.forEach(i => i.classList.remove('active'));
-        if (!isActive) item.classList.add('active');
-      });
-    }
-  });
-
-  const searchInput = document.getElementById('faqSearch');
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      const term = e.target.value.toLowerCase();
-      items.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        item.style.display = text.includes(term) ? 'block' : 'none';
-      });
-    });
-  }
 }
 
 // LIGHTBOX GALLERY
