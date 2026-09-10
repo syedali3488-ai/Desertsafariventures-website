@@ -23,7 +23,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
 
-  <!-- HEADER / STICKY NAV -->
+    <!-- HEADER / STICKY NAV -->
   <header class="header">
     <div class="container header-inner">
       <a href="index.html" class="logo">
@@ -34,16 +34,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </a>
 
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="navMenu">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link">About us</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        <li><a href="gallery.html" class="nav-link">Gallery</a></li>
         <li><a href="index.html#packages" class="nav-link">Packages</a></li>
         <li><a href="compare.html" class="nav-link">Compare Tiers</a></li>
-        <li><a href="gallery.html" class="nav-link">Gallery</a></li>
-        <li><a href="contact.html" class="nav-link active">Contact</a></li>
       </ul>
 
       <div class="header-controls">
+        <!-- Currency Converter Dropdown -->
         <div class="currency-selector">
           <button class="currency-btn" id="currencyBtn" aria-label="Select Currency">
             <span>🌐</span>
@@ -53,16 +54,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="currency-dropdown" id="currencyDropdown">
             <button class="currency-opt selected" data-curr="AED"><span>AED</span> <span>Dirham</span></button>
             <button class="currency-opt" data-curr="USD"><span>USD</span> <span>Dollar</span></button>
+            <button class="currency-opt" data-curr="EUR"><span>EUR</span> <span>Euro</span></button>
+            <button class="currency-opt" data-curr="GBP"><span>GBP</span> <span>Pound</span></button>
+            <button class="currency-opt" data-curr="SAR"><span>SAR</span> <span>Riyal</span></button>
+            <button class="currency-opt" data-curr="INR"><span>INR</span> <span>Rupee</span></button>
           </div>
         </div>
 
-        <button class="btn btn-primary" onclick="openBookingDrawer()">
+        <button class="btn btn-primary header-book-btn" onclick="openBookingDrawer()">
           <span>Book Safari</span>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
         </button>
 
-        <button class="burger-btn" aria-label="Toggle Navigation">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <button class="burger-btn" id="burgerBtn" aria-label="Toggle Navigation">
+          <svg class="burger-icon-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg class="burger-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;">
+            <path d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
       </div>
