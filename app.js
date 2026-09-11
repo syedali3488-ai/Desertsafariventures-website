@@ -267,6 +267,34 @@ const PACKAGES = [
     ]
   },
   {
+    id: 'arabian-elegance-birthday',
+    category: 'birthday',
+    title: 'Arabian Elegance Birthday Retreat',
+    tag: '★ BIRTHDAY SPECIAL',
+    rating: '5.0 (320 reviews)',
+    duration: '6–7 Hours • 3:00 PM Pickup',
+    priceAed: 999,
+    unit: '/ package (2 guests)',
+    image: 'assets/images/birthday_evening.jpg',
+    popular: true,
+    features: [
+      'Pick & Drop From Your Location',
+      'Desert Dune Bashing',
+      'Camel Ride',
+      'Sand Boarding',
+      'Desert Photography',
+      'Professional Couple Photos',
+      'Fresh Flower Bouquet',
+      'Celebration Cake',
+      'Couple Balloons',
+      'Romantic Surprise',
+      'Traditional Arabic Tea & Coffee',
+      'Refreshments & Mineral Water',
+      'Fire Show',
+      'Tanoura Show'
+    ]
+  },
+  {
     id: 'private-camp-setup',
     category: 'vip',
     title: 'Private Desert Camp Setup',
@@ -291,6 +319,15 @@ const PACKAGES = [
 ];
 
 // RENDER PACKAGES GRID
+
+function populatePackageDropdowns() {
+  document.querySelectorAll('#bookPackageSelect, #bookPackageSelectModal').forEach(select => {
+    select.innerHTML = PACKAGES.map(p => 
+      `<option value="${p.id}">${p.title} (${formatPrice(p.priceAed)})`
+    ).join('');
+  });
+}
+
 function renderPackages(filter = 'all') {
   const container = document.getElementById('packagesGrid');
   if (!container) return;
@@ -362,7 +399,35 @@ function closeLightbox() {
   if (overlay) overlay.classList.remove('show');
 }
 
-// INITIALIZATION
+// FILTER TABS LOGIC
+function initFilterTabs() {
+  const tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const category = tab.getAttribute('data-category');
+      renderPackages(category);
+    });
+  });
+}
+
+// FAQ ACCORDION LOGIC
+function initFaqAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    if (question) {
+      question.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        faqItems.forEach(i => i.classList.remove('open'));
+        if (!isOpen) {
+          item.classList.add('open');
+        }
+      });
+    }
+  });
+}
 
 // MOBILE MENU TOGGLE LOGIC
 function initMobileMenu() {
@@ -411,6 +476,7 @@ function initMobileMenu() {
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   renderPackages('all');
+  populatePackageDropdowns();
   initFilterTabs();
   initFaqAccordion();
   
