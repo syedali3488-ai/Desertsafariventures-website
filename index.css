@@ -1230,7 +1230,8 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-.modal-overlay.show .booking-drawer {
+.modal-overlay.show .booking-drawer,
+.drawer-overlay.show .booking-drawer {
   transform: scale(1);
 }
 

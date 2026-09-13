@@ -14,8 +14,15 @@ const CURRENCIES = {
 
 let currentCurrency = 'AED';
 
+// BOOKING DRAWER STATE
+let selectedPackageId = 'evening-premium';
+let adultCount = 2;
+let childCount = 0;
+let transportType = 'sharing';
+let addonQuad = 'none';
+
 function formatPrice(aedAmount) {
-  const curr = CURRENCIES[currentCurrency];
+  const curr = CURRENCIES[currentCurrency] || CURRENCIES.AED;
   const converted = Math.round(aedAmount * curr.rate);
   return `${curr.symbol} ${converted.toLocaleString()}`;
 }
@@ -23,16 +30,19 @@ function formatPrice(aedAmount) {
 function updateAllPrices() {
   document.querySelectorAll('[data-price-aed]').forEach(el => {
     const aed = parseFloat(el.getAttribute('data-price-aed'));
-    el.textContent = formatPrice(aed);
+    if (!isNaN(aed)) {
+      el.textContent = formatPrice(aed);
+    }
   });
   
   // Update currency dropdown button text
   const currBtn = document.getElementById('currencyBtn');
   if (currBtn) {
-    currBtn.querySelector('.curr-code').textContent = currentCurrency;
+    const currCodeEl = currBtn.querySelector('.curr-code');
+    if (currCodeEl) currCodeEl.textContent = currentCurrency;
   }
   
-  // Recalculate booking total if drawer is open
+  // Recalculate booking total if drawer is open or available
   calculateBookingTotal();
 }
 
@@ -318,12 +328,335 @@ const PACKAGES = [
   }
 ];
 
-// RENDER PACKAGES GRID
+// DYNAMIC MODAL DRAWER CREATION & LOOKUP
+function getBookingModalElement() {
+  let modal = document.getElementById('bookingModal') || document.getElementById('bookingDrawerOverlay');
+  if (!modal) {
+    // Dynamically inject booking modal drawer markup if page lacks one
+    const div = document.createElement('div');
+    div.className = 'modal-overlay';
+    div.id = 'bookingModal';
+    div.onclick = closeBookingDrawer;
+    div.innerHTML = `
+      <div class="booking-drawer" onclick="event.stopPropagation()">
+        <div class="drawer-header">
+          <h3 class="drawer-title">Reserve Your Desert Safari</h3>
+          <button class="close-btn" onclick="closeBookingDrawer()" aria-label="Close">✕</button>
+        </div>
+        <div class="drawer-body">
+          <form id="bookingForm" onsubmit="submitBookingToWhatsapp(event)">
+            <div class="form-group">
+              <label class="form-label">Select Package</label>
+              <select class="form-control" id="bookPackageSelect">
+                ${PACKAGES.map(p => `<option value="${p.id}">${p.title} (${formatPrice(p.priceAed)})</option>`).join('')}
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Safari Date</label>
+              <input type="date" class="form-control" id="bookDate" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Number of Guests</label>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div class="counter-wrap">
+                  <span>Adults</span>
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <button type="button" class="counter-btn" onclick="updateCounter('adult', -1)">-</button>
+                    <span id="adultCountEl" style="font-weight: 700;">2</span>
+                    <button type="button" class="counter-btn" onclick="updateCounter('adult', 1)">+</button>
+                  </div>
+                </div>
+                <div class="counter-wrap">
+                  <span>Kids (3-11y, 25% Off)</span>
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <button type="button" class="counter-btn" onclick="updateCounter('child', -1)">-</button>
+                    <span id="childCountEl" style="font-weight: 700;">0</span>
+                    <button type="button" class="counter-btn" onclick="updateCounter('child', 1)">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Transport Option</label>
+              <select class="form-control" id="transportSelect">
+                <option value="sharing">Sharing 4x4 SUV (Included Free)</option>
+                <option value="private">Private 4x4 Land Cruiser (+400 AED Flat)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Add-on Quad Bike Ride</label>
+              <select class="form-control" id="quadSelect">
+                <option value="none">No Quad Bike</option>
+                <option value="30m">30 Min Quad Bike (+150 AED / pax)</option>
+                <option value="60m">60 Min Quad Bike (+250 AED / pax)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Lead Guest Full Name</label>
+              <input type="text" class="form-control" id="bookName" placeholder="e.g. John Smith" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hotel / Pick-Up Location</label>
+              <input type="text" class="form-control" id="bookHotel" placeholder="e.g. Atlantis The Palm / Address Downtown" required>
+            </div>
+            <div class="price-breakdown">
+              <div class="breakdown-row">
+                <span>Adults Total</span>
+                <span id="subtotalAdults">2 × AED 129</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Children Total</span>
+                <span id="subtotalChildren">0 × AED 89</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Transport</span>
+                <span id="subtotalTransport">Free Included</span>
+              </div>
+              <div class="breakdown-total">
+                <span>Total Payable on Arrival</span>
+                <span id="grandTotalEl" style="color: var(--brand-gold);">AED 238</span>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 16px;">
+              <span>Reserve via WhatsApp (No Payment Needed Now)</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(div);
+    modal = div;
+  }
+  bindDrawerFormEvents();
+  return modal;
+}
+
+function bindDrawerFormEvents() {
+  const pkgSelect = document.getElementById('bookPackageSelect');
+  if (pkgSelect && !pkgSelect._hasListener) {
+    pkgSelect._hasListener = true;
+    pkgSelect.addEventListener('change', (e) => {
+      selectedPackageId = e.target.value;
+      calculateBookingTotal();
+    });
+  }
+
+  const transportSelect = document.getElementById('transportSelect');
+  if (transportSelect && !transportSelect._hasListener) {
+    transportSelect._hasListener = true;
+    transportSelect.addEventListener('change', (e) => {
+      transportType = e.target.value;
+      calculateBookingTotal();
+    });
+  }
+
+  const quadSelect = document.getElementById('quadSelect');
+  if (quadSelect && !quadSelect._hasListener) {
+    quadSelect._hasListener = true;
+    quadSelect.addEventListener('change', (e) => {
+      addonQuad = e.target.value;
+      calculateBookingTotal();
+    });
+  }
+}
+
+function getPagePackageId() {
+  const path = window.location.pathname.toLowerCase();
+  if (path.includes('vip-safari')) return 'evening-vip';
+  if (path.includes('standard-safari')) return 'evening-standard';
+  if (path.includes('quad-buggy')) return 'combo-quad-safari';
+  if (path.includes('morning-safari')) return 'sunrise-safari';
+  if (path.includes('evening-premium')) return 'evening-premium';
+  return selectedPackageId || 'evening-premium';
+}
+
+function openBookingDrawer(packageId) {
+  const modal = getBookingModalElement();
+  if (!modal) return;
+
+  const targetPkgId = packageId || getPagePackageId();
+  selectedPackageId = targetPkgId;
+
+  const pkgSelect = document.getElementById('bookPackageSelect');
+  if (pkgSelect) {
+    pkgSelect.value = targetPkgId;
+  }
+
+  const dateInput = document.getElementById('bookDate');
+  if (dateInput && !dateInput.value) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.value = tomorrow.toISOString().split('T')[0];
+  }
+
+  calculateBookingTotal();
+  modal.classList.add('show');
+}
+
+function openBookingModal(packageId) {
+  openBookingDrawer(packageId);
+}
+
+function closeBookingDrawer() {
+  const modal = document.getElementById('bookingModal') || document.getElementById('bookingDrawerOverlay');
+  if (modal) {
+    modal.classList.remove('show');
+  }
+}
+
+function closeBookingModal() {
+  closeBookingDrawer();
+}
+
+function updateCounter(type, delta) {
+  if (type === 'adult') {
+    adultCount = Math.max(1, adultCount + delta);
+    const el = document.getElementById('adultCountEl');
+    if (el) el.textContent = adultCount;
+  } else if (type === 'child') {
+    childCount = Math.max(0, childCount + delta);
+    const el = document.getElementById('childCountEl');
+    if (el) el.textContent = childCount;
+  }
+  calculateBookingTotal();
+}
+
+function calculateBookingTotal() {
+  const pkgSelect = document.getElementById('bookPackageSelect');
+  if (pkgSelect && pkgSelect.value) {
+    selectedPackageId = pkgSelect.value;
+  }
+
+  const pkg = PACKAGES.find(p => p.id === selectedPackageId) || PACKAGES[0];
+  const pricePerAdult = pkg.priceAed;
+  const isVehicleFlat = pkg.unit.includes('vehicle') || pkg.unit.includes('setup') || pkg.unit.includes('package');
+
+  let baseTotal = 0;
+  let pricePerChild = Math.round(pricePerAdult * 0.75);
+
+  if (isVehicleFlat) {
+    baseTotal = pricePerAdult;
+  } else {
+    baseTotal = (adultCount * pricePerAdult) + (childCount * pricePerChild);
+  }
+
+  // Transport
+  const transportSel = document.getElementById('transportSelect');
+  if (transportSel) transportType = transportSel.value;
+  const transportCost = (transportType === 'private') ? 400 : 0;
+
+  // Quad
+  const quadSel = document.getElementById('quadSelect');
+  if (quadSel) addonQuad = quadSel.value;
+  let quadCostPerPax = 0;
+  if (addonQuad === '30m') quadCostPerPax = 150;
+  if (addonQuad === '60m') quadCostPerPax = 250;
+  const totalQuadCost = quadCostPerPax * (adultCount + childCount);
+
+  const totalAed = baseTotal + transportCost + totalQuadCost;
+
+  // Update DOM Elements
+  const adultSubEl = document.getElementById('subtotalAdults');
+  if (adultSubEl) {
+    adultSubEl.textContent = isVehicleFlat
+      ? `1 Flat Rate (${formatPrice(pricePerAdult)})`
+      : `${adultCount} × ${formatPrice(pricePerAdult)}`;
+  }
+
+  const childSubEl = document.getElementById('subtotalChildren');
+  if (childSubEl) {
+    childSubEl.textContent = isVehicleFlat
+      ? `Included (up to 6 guests)`
+      : `${childCount} × ${formatPrice(pricePerChild)}`;
+  }
+
+  const transportSubEl = document.getElementById('subtotalTransport');
+  if (transportSubEl) {
+    transportSubEl.textContent = transportCost > 0 ? formatPrice(transportCost) : 'Free Included';
+  }
+
+  const grandTotalEl = document.getElementById('grandTotalEl');
+  if (grandTotalEl) {
+    grandTotalEl.textContent = formatPrice(totalAed);
+  }
+}
+
+// SUBMIT BOOKING RESERVATION TO WHATSAPP
+function submitBookingToWhatsapp(e) {
+  if (e && typeof e.preventDefault === 'function') {
+    e.preventDefault();
+  }
+
+  const nameInput = document.getElementById('bookName');
+  const hotelInput = document.getElementById('bookHotel');
+  const dateInput = document.getElementById('bookDate');
+  const modal = document.getElementById('bookingModal') || document.getElementById('bookingDrawerOverlay');
+
+  // If user clicked a direct "WhatsApp" button and drawer is NOT visible, open the drawer for them
+  if (!e && modal && !modal.classList.contains('show')) {
+    openBookingDrawer(getPagePackageId());
+    return;
+  }
+
+  // If input fields exist, check if user has filled name/hotel/date
+  if (nameInput && hotelInput) {
+    const name = nameInput.value.trim();
+    const hotel = hotelInput.value.trim();
+    const date = dateInput ? dateInput.value : '';
+
+    if (!name || !hotel) {
+      if (modal && !modal.classList.contains('show')) {
+        openBookingDrawer(getPagePackageId());
+        return;
+      }
+      alert('Please fill in your Lead Guest Name and Hotel / Pickup Location.');
+      if (!name) nameInput.focus();
+      else if (!hotel) hotelInput.focus();
+      return;
+    }
+
+    const pkgSelect = document.getElementById('bookPackageSelect');
+    const selectedId = pkgSelect ? pkgSelect.value : selectedPackageId;
+    const pkg = PACKAGES.find(p => p.id === selectedId) || PACKAGES[0];
+
+    const grandTotalEl = document.getElementById('grandTotalEl');
+    const grandTotalText = grandTotalEl ? grandTotalEl.textContent : '';
+
+    const transportSel = document.getElementById('transportSelect');
+    const transportText = transportSel ? transportSel.options[transportSel.selectedIndex].text : 'Sharing 4x4 SUV';
+
+    const quadSel = document.getElementById('quadSelect');
+    const quadText = quadSel ? quadSel.options[quadSel.selectedIndex].text : 'None';
+
+    let msg = `🌵 *DESERT SAFARI RESERVATION INQUIRY* 🌵\n`;
+    msg += `-----------------------------------\n`;
+    msg += `📦 *Package:* ${pkg.title}\n`;
+    if (date) msg += `📅 *Date:* ${date}\n`;
+    msg += `👥 *Guests:* ${adultCount} Adult(s)${childCount > 0 ? `, ${childCount} Child(ren)` : ''}\n`;
+    msg += `🚗 *Transport:* ${transportText}\n`;
+    if (quadText && !quadText.includes('No Quad')) msg += `🏍️ *Quad Add-on:* ${quadText}\n`;
+    msg += `👤 *Lead Guest:* ${name}\n`;
+    msg += `🏨 *Pickup Location:* ${hotel}\n`;
+    if (grandTotalText) msg += `💰 *Total Estimated Price:* ${grandTotalText}\n`;
+    msg += `-----------------------------------\n`;
+    msg += `Please confirm booking availability & pickup details. Thank you!`;
+
+    const waUrl = `https://wa.me/971544508581?text=${encodeURIComponent(msg)}`;
+    window.open(waUrl, '_blank');
+    closeBookingDrawer();
+    return;
+  }
+
+  // Fallback for general WhatsApp inquiry
+  const generalMsg = `Hello Desert Safari Ventures, I would like to inquire about booking a desert safari package.`;
+  const waUrl = `https://wa.me/971544508581?text=${encodeURIComponent(generalMsg)}`;
+  window.open(waUrl, '_blank');
+}
 
 function populatePackageDropdowns() {
   document.querySelectorAll('#bookPackageSelect, #bookPackageSelectModal').forEach(select => {
     select.innerHTML = PACKAGES.map(p => 
-      `<option value="${p.id}">${p.title} (${formatPrice(p.priceAed)})`
+      `<option value="${p.id}">${p.title} (${formatPrice(p.priceAed)})</option>`
     ).join('');
   });
 }
@@ -479,6 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
   populatePackageDropdowns();
   initFilterTabs();
   initFaqAccordion();
+  bindDrawerFormEvents();
   
   // Currency Dropdown toggle
   const currBtn = document.getElementById('currencyBtn');
@@ -500,31 +834,6 @@ document.addEventListener('DOMContentLoaded', () => {
         opt.classList.add('selected');
         updateAllPrices();
       });
-    });
-  }
-
-  // Booking drawer form listeners
-  const pkgSelect = document.getElementById('bookPackageSelect');
-  if (pkgSelect) {
-    pkgSelect.addEventListener('change', (e) => {
-      selectedPackageId = e.target.value;
-      calculateBookingTotal();
-    });
-  }
-
-  const transportSelect = document.getElementById('transportSelect');
-  if (transportSelect) {
-    transportSelect.addEventListener('change', (e) => {
-      transportType = e.target.value;
-      calculateBookingTotal();
-    });
-  }
-
-  const quadSelect = document.getElementById('quadSelect');
-  if (quadSelect) {
-    quadSelect.addEventListener('change', (e) => {
-      addonQuad = e.target.value;
-      calculateBookingTotal();
     });
   }
 
